@@ -1,15 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { RegisterDto } from 'src/auth/dto/register.dto';
 
 @Injectable()
 export class UserService {
-    constructor(private prisma: PrismaService){}
+    logger: Logger;
+    constructor(private prisma: PrismaService){
+        this.logger = new Logger(UserService.name);
+    }
 
     async createUser(user: RegisterDto){
         const roles = user.roles
         delete user.roles
+        this.logger.debug(`event=create_user outcome=success type=audit`);
         return await this.prisma.user.create({
             data: {
                 ...user,
@@ -31,6 +35,7 @@ export class UserService {
     
 
     async getUserByEmail(email: string){
+        this.logger.debug(`event=get_user_by_email outcome=success type=audit`);
         return await this.prisma.user.findUnique({
             where: {
                 email 
@@ -46,6 +51,7 @@ export class UserService {
     }
 
     async getUserById(id: number){
+        this.logger.debug('event=get_user_by_id outcome=success type=audit');
         return await this.prisma.user.findUnique({
             where: {
                 id
@@ -61,6 +67,7 @@ export class UserService {
     }
 
     async updateUser(user: User, id: number){
+        this.logger.debug(`event=update_user outcome=success type=audit`);
         return await this.prisma.user.update({
             where: {
                 id
@@ -72,6 +79,7 @@ export class UserService {
     }
 
     async getAllUsers(){
+        this.logger.debug(`event=get_all_users outcome=success type=audit`);
         return await this.prisma.user.findMany(
             {
                 include: {
