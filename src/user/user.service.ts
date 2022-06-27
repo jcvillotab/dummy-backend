@@ -1,13 +1,14 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { CustomLogger } from 'src/common/utils/custom_logger';
 import { User } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { RegisterDto } from 'src/auth/dto/register.dto';
 
 @Injectable()
 export class UserService {
-    logger: Logger;
+    logger: CustomLogger;
     constructor(private prisma: PrismaService){
-        this.logger = new Logger(UserService.name);
+        this.logger = new CustomLogger(UserService.name);
     }
 
     async createUser(user: RegisterDto){

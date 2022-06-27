@@ -1,4 +1,5 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
+import {CustomLogger} from '../common/utils/custom_logger';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'prisma/prisma.service';
 import { UserService } from 'src/user/user.service';
@@ -13,9 +14,9 @@ import { PasswordResetDto } from './dto/password_reset.dto';
 
 @Injectable()
 export class AuthService {
-    logger: Logger;
+    logger: CustomLogger;
     constructor(private prisma: PrismaService, private jwtService: JwtService, private userService: UserService, private mailService: MailService) {
-        this.logger = new Logger(AuthService.name);
+        this.logger = new CustomLogger(AuthService.name);
     }
 
     async generateToken(userId: number, email:string, roles: number[]) {
