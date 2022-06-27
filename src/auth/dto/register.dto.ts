@@ -22,4 +22,7 @@ export class RegisterDto {
 
     @IsArray()
     roles: number[];
+
+    @IsArray()
+    pets: number[];
 }

@@ -46,6 +46,13 @@ export class UserService {
                     select: {
                         id: true,
                     }
+                },
+                pets:{
+                    select: {
+                        id: true,
+                        name: true,
+                        age: true,
+                    }
                 }
             }
         })
@@ -61,6 +68,13 @@ export class UserService {
                 roles:{
                     select: {
                         id: true,
+                    }
+                },
+                pets:{
+                    select: {
+                        id: true,
+                        name: true,
+                        age: true,
                     }
                 }
             }
@@ -87,6 +101,13 @@ export class UserService {
                     roles:{
                         select: {
                             id: true,
+                        }
+                    },
+                    pets:{
+                        select: {
+                            id: true,
+                            name: true,
+                            age: true,
                         }
                     }
                 }

@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { Public } from 'src/common/decorators/public.decorator';
 import { UserService } from './user.service';
 
@@ -9,8 +9,10 @@ export class UserController {
 
     }
 
-    @Public()
+    @Get('/')
     async getAllUsers() {
         return await this.userService.getAllUsers();
     }
+
+
 }
